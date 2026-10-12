@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gladiators Gym &amp; Spa</title>
+<meta name="description" content="الاشتراكات والكلاسات والمواعيد والعروض | Memberships, classes, hours and offers">
+<meta name="theme-color" content="#000000">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gladiators Gym &amp; Spa">
+<meta property="og:title" content="Gladiators Gym &amp; Spa">
+<meta property="og:description" content="الاشتراكات • الكلاسات • المواعيد • العروض — اعرف كل التفاصيل واحجز أونلاين">
+<!-- IMPORTANT: replace Gladiators-Gym.github.io below with your real site address (with https://, no trailing slash). Example: https://yourname.github.io/gladiators -->
+<meta property="og:image" content="https://Gladiators-Gym.github.io/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://Gladiators-Gym.github.io/og-image.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23000'/%3E%3Crect x='3' y='3' width='58' height='58' rx='11' fill='none' stroke='%23e01616' stroke-width='4'/%3E%3Ctext x='32' y='46' font-size='38' font-weight='bold' text-anchor='middle' fill='%23fff' font-family='Arial Black,Arial'%3EG%3C/text%3E%3C/svg%3E">
+<style>
+:root{--gift:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120' fill='none' stroke='white' stroke-opacity='.16' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='12' y='34' width='30' height='24' rx='3'/%3E%3Cpath d='M27 34v24M12 44h30'/%3E%3Cpath d='M27 34c-6 0-9-6-5-8s7 3 5 8zM27 34c6 0 9-6 5-8s-7 3-5 8z'/%3E%3Crect x='72' y='78' width='26' height='20' rx='3'/%3E%3Cpath d='M85 78v20M72 87h26'/%3E%3Cpath d='M85 78c-5 0-8-5-4-7s6 3 4 7zM85 78c5 0 8-5 4-7s-6 3-4 7z'/%3E%3Cpath d='M62 14l2.5 5 5 2.5-5 2.5L62 29l-2.5-5-5-2.5 5-2.5z'/%3E%3Cpath d='M14 96l1.8 3.6 3.6 1.8-3.6 1.8L14 106l-1.8-3.8-3.6-1.8 3.6-1.8z'/%3E%3Ccircle cx='100' cy='46' r='2.5' fill='white' fill-opacity='.2' stroke='none'/%3E%3Ccircle cx='52' cy='88' r='2' fill='white' fill-opacity='.2' stroke='none'/%3E%3Ccircle cx='100' cy='12' r='2' fill='white' fill-opacity='.2' stroke='none'/%3E%3C/svg%3E")}
+*{box-sizing:border-box}
+body{margin:0;padding:22px 14px 40px;min-height:100vh;background:radial-gradient(circle at 70% 0,#4a0808 0,#150303 45%,#050505 100%) fixed;color:#fff;font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:center}
+.wrap{width:100%;max-width:480px}
+/* admin */
+.controls{background:#171915;border:1px solid #34362f;border-radius:14px;padding:18px;margin-bottom:22px}
+.controls h2{margin:0 0 6px;color:#ff2a2a;font-size:20px;text-align:center;letter-spacing:1px}
+label{display:block;margin:12px 0 5px;color:#ddd;font-size:15px}
+input[type=text],textarea{width:100%;padding:0 12px;border-radius:8px;border:1px solid #444840;background:#0c0d0b;color:#fff;font:16px Arial,sans-serif;outline:none}
+input[type=text]{height:44px}
+textarea{height:100px;padding:10px 12px}
+input:focus,textarea:focus{border-color:#ff4935}
+details{margin-top:14px;border-top:1px solid #34362f;padding-top:12px}
+summary{cursor:pointer;color:#ff6a5a;font-size:15px}
+.btns{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+button{flex:1;min-width:110px;height:46px;border:0;border-radius:8px;background:#e01616;color:#fff;font-size:14px;font-weight:bold;cursor:pointer}
+button.alt{background:#2b2d27}
+button:hover{filter:brightness(1.15)}
+.note{margin-top:10px;color:#888;font-size:12px;line-height:1.5}
+.off{border:1px solid #34362f;border-radius:10px;padding:12px;margin-top:12px}
+.off.on{border-color:#ff2a2a;background:rgba(224,22,22,.12)}
+.badge{display:inline-block;background:#e01616;border-radius:6px;padding:3px 9px;font-size:12px;font-weight:bold}
+#back{position:fixed;top:10px;right:10px;z-index:5;min-width:0;flex:none;height:38px;padding:0 14px;display:none}
+/* public page */
+.hero{text-align:center;padding:26px 18px 22px;border:2px solid #ff2a2a;border-radius:24px;background:radial-gradient(circle at 80% 0,rgba(214,0,28,.4),transparent 60%),rgba(0,0,0,.55);box-shadow:0 0 0 4px #000,0 0 0 5px rgba(255,255,255,.4),0 0 26px rgba(255,42,42,.45)}
+.hrow{display:flex;align-items:center;justify-content:center;gap:12px}
+.hrow img{height:76px;width:auto;max-width:36%;object-fit:contain}
+.hero .t1{font:900 clamp(24px,8vw,38px) Arial Black,Arial,sans-serif;letter-spacing:2px}
+.hero .t2{color:#ff2a2a;font-weight:bold;letter-spacing:clamp(4px,1.6vw,8px);margin-top:4px}
+.ht{text-align:center}
+.hero .tg{margin-top:8px;color:#ddd;font-size:14px;line-height:1.4;width:0;min-width:100%}
+.cta{display:block;margin:18px 0 6px;padding:15px;border-radius:12px;background:#e01616;color:#fff;text-align:center;font-weight:bold;font-size:17px;text-decoration:none}
+.cta.ghost{background:transparent;border:1.5px solid #ff2a2a}
+h3{margin:26px 0 10px;font-size:13px;letter-spacing:4px;color:#ff4a5a;display:flex;align-items:center;gap:10px}
+h3:after{content:"";flex:1;height:1px;background:rgba(255,255,255,.2)}
+.ad{position:relative;overflow:hidden;width:92%;min-height:88px;margin:14px auto 0;padding:18px 16px;border:1.5px solid #fff;border-radius:16px;background:linear-gradient(120deg,#c3122b,#6d0816);box-shadow:0 0 22px rgba(255,42,42,.55);display:flex;gap:12px;align-items:center;justify-content:center;text-align:center;font-size:17px;font-weight:bold;line-height:1.5}
+.ad:after{content:"";position:absolute;top:0;bottom:0;width:60px;left:-90px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);transform:skewX(-20deg);animation:shine 4.5s ease-in-out infinite}
+.ad .ai{width:42px;height:42px;border-radius:50%;background:#e01616;border:2px solid #fff;display:grid;place-items:center;flex:none;animation:pulse 2s ease-in-out infinite}
+.ad .ai svg{width:22px;height:22px}
+.ad.tap{cursor:pointer}
+.ad .hint{flex:none;padding:4px 14px;border:1px solid rgba(255,255,255,.85);border-radius:14px;font-size:12px;font-weight:normal;background:rgba(0,0,0,.25)}
+@keyframes shine{0%,55%{left:-90px}100%{left:115%}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+.offers{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.offer{position:relative;overflow:hidden;flex:1 1 calc(50% - 5px);min-width:0;min-height:120px;border:1.5px solid #ff2a2a;border-radius:16px;padding:14px;background:linear-gradient(135deg,#8f0f21,#3a0610 70%);cursor:pointer;box-shadow:0 0 18px rgba(255,42,42,.35);display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+.offer.fixed{border-color:#fff;background:linear-gradient(135deg,#4a4a4a,#161616 70%);box-shadow:0 0 14px rgba(255,255,255,.18)}
+.offer.ar{direction:rtl}
+.offer .scn{position:absolute;right:0;bottom:0;height:100%;width:54%;pointer-events:none}
+.offer.ar .scn{right:auto;left:0}
+.offer .oh,.offer .hint{position:relative;z-index:1}
+.offer .oh{font-weight:bold;font-size:16px;line-height:1.35;max-width:60%;word-break:break-word}
+.offer .hint{display:inline-block;margin-top:10px;padding:4px 14px;border:1px solid rgba(255,255,255,.7);border-radius:14px;font-size:12px;background:rgba(0,0,0,.25)}
+.ocard{background-color:#3a0610;position:relative;width:min(92vw,520px);min-height:300px;max-height:94vh;overflow-y:auto;scrollbar-width:none;border:1.5px solid #ff2a2a;border-radius:22px;padding:30px 24px 12px;background:linear-gradient(160deg,#a8132a,#3a0610 70%);box-shadow:0 0 40px rgba(255,42,42,.5);display:flex;flex-direction:column;animation:zin .22s ease;transition:transform .17s ease,opacity .17s ease}
+.ocard.fixed{border-color:#fff;background:linear-gradient(160deg,#4a4a4a,#101010 70%);box-shadow:0 0 30px rgba(255,255,255,.25)}
+.ocard::-webkit-scrollbar{display:none}
+.ocard.ar{direction:rtl}
+.ocard.adc{background:linear-gradient(160deg,#c3122b,#5a0612)}
+.ocard.hasimg{min-height:420px;background-image:linear-gradient(rgba(0,0,0,.28),rgba(0,0,0,.28)),var(--bg);background-size:cover;background-position:center}
+.ocard.hasimg .scn{display:none}
+.ocard.hasimg .oh,.ocard.hasimg p{text-shadow:0 1px 8px rgba(0,0,0,.9)}
+.ocard .oh{font-weight:bold;font-size:28px;line-height:1.3;padding-inline-end:26px}
+.ocard .sub{color:#ffd0d6;font-size:15px;margin:6px 0 14px}
+.ocard p{margin:0 0 12px;white-space:pre-wrap;line-height:1.8;font-size:var(--fs,18px)}
+.ocard .scn{position:static;width:100%;height:var(--sh,150px);margin-top:auto;flex:none;pointer-events:none}
+.ocard .x{position:absolute;top:10px;inset-inline-end:16px;font-style:normal;font-size:30px;line-height:1;color:#fff;opacity:.85}
+.lb.out .ocard{transform:scale(.45);opacity:0}
+@keyframes pop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.xbox{animation:pop .25s ease}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes tw{0%,100%{opacity:.25;transform:scale(.7)}50%{opacity:1;transform:scale(1.15)}}
+.f1{animation:fl 4.2s ease-in-out infinite}
+.f2{animation:fl 3.6s ease-in-out -1.2s infinite}
+.f3{animation:fl 4.8s ease-in-out -2.4s infinite}
+.sp{transform-box:fill-box;transform-origin:center;animation:tw 2.6s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.f1,.f2,.f3,.sp,.ad:after,.ad .ai{animation:none}}
+.lb{position:fixed;inset:0;z-index:20;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.72);padding:14px;transition:background .17s}
+.lb.on{display:flex}
+.lb img{max-width:100%;max-height:100%;display:block;border:1.5px solid rgba(255,255,255,.75);border-radius:12px;animation:zin .2s ease;transition:transform .17s ease,opacity .17s ease}
+.lb.out{background:transparent}
+.lb.out img{transform:scale(.45);opacity:0}
+@keyframes zin{from{transform:scale(.85);opacity:0}to{transform:none;opacity:1}}
+.pimg{max-width:140px;max-height:100px;border-radius:8px;display:block;margin-bottom:8px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tile{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 4px;border:1px solid rgba(255,255,255,.18);border-radius:14px;background:rgba(0,0,0,.5);color:#fff;text-decoration:none;font-size:13px}
+.tile .ic{width:46px;height:46px;border-radius:12px;background:#150303;border:1.8px solid #ff2a2a;display:grid;place-items:center}
+.tile svg{width:26px;height:26px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{padding:8px 14px;border-radius:20px;border:1px solid rgba(255,255,255,.25);font-size:14px;background:rgba(0,0,0,.45)}
+.xbox{margin-top:12px}
+.book{border:1px solid rgba(255,255,255,.18);border-radius:14px;background:rgba(0,0,0,.5);padding:16px}
+.book p{white-space:pre-wrap;line-height:1.7;margin:0;font-size:16px}
+.book .cta{margin:14px 0 0}
+.book input{margin-top:10px}
+.book button.cta{width:100%;height:auto;min-width:0;margin-top:12px;cursor:pointer;font-family:inherit}
+.bnote{margin-top:8px;text-align:center;color:#aaa;font-size:12px}
+.qa details{margin:0 0 8px;padding:0;border:1px solid rgba(255,255,255,.18);border-radius:12px;background:rgba(0,0,0,.5)}
+.qa summary{padding:14px 16px;color:#fff;font-weight:bold;font-size:15px;line-height:1.5;list-style-position:inside}
+.qa details[open]{border-color:#ff2a2a}
+.qa details p{margin:0;padding:0 16px 14px;white-space:pre-wrap;line-height:1.7;font-size:15px;color:#ddd}
+.topbar{direction:ltr;display:flex;justify-content:flex-end;margin-bottom:10px}
+.topbar .lang{flex:none;min-width:0;height:34px;padding:0 18px;border:1.5px solid rgba(255,255,255,.75);border-radius:17px;background:rgba(0,0,0,.5);color:#fff;font-size:14px;font-weight:bold;cursor:pointer}
+.hero{direction:ltr}
+.offer:not(.ar){direction:ltr}
+#pub[dir=rtl] h3{letter-spacing:0;font-size:15px}
+.foot{margin-top:30px;text-align:center;color:#888;font-size:12px;letter-spacing:2px}
+</style>
+</head>
+<body>
+<button id="back" class="alt">&larr; BACK</button>
+<div class="wrap">
+
+<div id="admin" style="display:none">
+ <div class="controls">
+  <h2>GLADIATORS PAGE ADMIN</h2>
+  <details open>
+   <summary>Gym info</summary>
+   <label>Hosted page address (where you uploaded index.html)</label><input id="host" type="text" placeholder="https://your-name.github.io/gladiators/">
+   <label>Logo file name (same folder as index.html)</label><input id="logoUrl" type="text" value="GYM LOGO.png">
+   <label>Short line under the logo</label><input id="tag" type="text" placeholder="Open every day 10 AM - 12 AM">
+   <label>WhatsApp number (like 01012345678)</label><input id="wa" type="text" value="01090819150">
+   <label>Messenger username</label><input id="ms" type="text" value="GladiatorsGym">
+   <label>Facebook link</label><input id="fb" type="text" value="https://facebook.com/GladiatorsGym">
+   <label>Instagram link</label><input id="ig" type="text" value="https://instagram.com/gladiatorsgym">
+   <label>TikTok link</label><input id="tt" type="text" value="https://tiktok.com/@gladiatorsgym">
+   <label>Google Maps link</label><input id="map" type="text" value="https://maps.app.goo.gl/XXXXXXXX">
+   <label>Memberships image (subscriptions)</label><div id="memP"></div>
+   <label>Group classes image (classes / schedule)</label><div id="clsP"></div>
+   <label>Working hours image</label><div id="hrsP"></div>
+   <label>Facilities / services (one per line)</label><textarea id="services" placeholder="Fitness area&#10;Spa&#10;Personal trainers"></textarea>
+  </details>
+
+  <details open>
+   <summary>Fixed offer (always shown)</summary>
+   <label>Offer name</label><input id="fixTitle" type="text" value="الصحاب والعيلة">
+   <label>Offer details</label><textarea id="fixText">تعالى مع صحابك أو عيلتك واستفيدوا بسعر خاص للمجموعات. اسألنا عن التفاصيل.</textarea>
+   <label>Offer image (optional)</label><div id="fixImgBox"></div>
+  </details>
+
+  <details open>
+   <summary>Offers list (choose which one is shown)</summary>
+   <div class="note">Add all your offers once. Press SHOW THIS OFFER on the one you want visitors to see. Press HIDE CURRENT OFFER to show none.</div>
+   <div id="offList"></div>
+   <div class="btns">
+    <button id="addOffer" class="alt">+ ADD OFFER</button>
+    <button id="hideOffer" class="alt">HIDE CURRENT OFFER</button>
+   </div>
+  </details>
+
+  <details>
+   <summary>Announcement banner (optional)</summary>
+   <label style="display:flex;gap:10px;align-items:center"><input type="checkbox" id="adOn" style="width:20px;height:20px"> Show the banner on the page</label>
+   <label>Banner text (short, like an ad)</label><textarea id="adText" style="height:80px" placeholder="New ladies' classes start next week!"></textarea>
+   <label>Details shown when the banner is tapped (optional)</label><textarea id="adDetails" style="height:120px" placeholder="Days, times, price, how to join..."></textarea>
+  </details>
+
+  <details>
+   <summary>Online booking details</summary>
+   <label>How to book online (steps, payment, cancellation...)</label><textarea id="bookText" style="height:150px">1. Choose your membership from the Memberships tile.
+2. Transfer the subscription fee (Vodafone Cash / InstaPay).
+3. Write your name and phone number below.
+4. Send us the transfer screenshot on WhatsApp.
+5. We confirm your booking and your card is ready.</textarea>
+   <label>Booking link (optional: Google Form, booking page...)</label><input id="bookLink" type="text" placeholder="https://forms.gle/...">
+  </details>
+
+  <details>
+   <summary>Frequently asked questions</summary>
+   <label>Write each question on its own line, the answer under it, and leave an empty line between questions</label>
+   <textarea id="faq" style="height:240px">What are the working hours?
+Every day from 10 AM to 12 AM.
+
+Is there a free trial session?
+Yes, one free session for new members.
+
+Can I freeze my membership?
+Yes, please contact us on WhatsApp.</textarea>
+  </details>
+
+  <div class="btns">
+   <button id="prev" class="alt">PREVIEW PAGE</button>
+   <button id="save">DOWNLOAD gym.json</button>
+  </div>
+  <div class="btns">
+   <button id="cp" class="alt">COPY PAGE LINK</button>
+   <button id="wsend">SEND LINK ON WHATSAPP</button>
+   <button id="logoBtn" class="alt">PREVIEW LOGO FILE</button>
+  </div>
+  <div class="note">To update anything: edit here, press DOWNLOAD gym.json, and upload it to your site in place of the old gym.json. The public link stays the same. Member scan cards are made with the separate file member-card-tool.html.</div>
+ </div>
+</div>
+
+<div id="pub"></div>
+</div>
+<div id="ob" class="lb"><div id="obBox"></div></div>
+<div id="lb" class="lb"><img id="lbImg" alt=""></div>
+<input type="file" id="logoFile" accept="image/png,image/jpeg" style="display:none">
+
+<script>
+const $ = id => document.getElementById(id);
+const FIELDS = ['host','logoUrl','tag','wa','ms','fb','ig','tt','map','services','fixTitle','fixText','bookText','bookLink','faq','adText','adDetails','tag_en','services_en','fixTitle_en','fixText_en','bookText_en','faq_en','adText_en','adDetails_en'];
+const SAVE = FIELDS.filter(k => k !== 'host');
+['tag', 'services', 'fixTitle', 'fixText', 'bookText', 'faq', 'adText', 'adDetails'].forEach(k => {
+  const el = $(k), n = el.cloneNode(false);
+  n.id = k + '_en'; n.removeAttribute('value'); n.value = ''; n.placeholder = 'English version (optional)'; n.dir = 'ltr'; n.style.marginTop = '8px';
+  el.insertAdjacentElement('afterend', n);
+});
+const KEY = 'glad-page-1';
+let logo = '', offers = [], active = '', fixImg = '', imgs = { mem: '', cls: '', hrs: '' };
+const esc = s => String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+const waDigits = v => { let d = String(v || '').replace(/\D/g, ''); if (d.startsWith('00')) d = d.slice(2); else if (d.startsWith('0')) d = '20' + d.slice(1); return d; };
+const cfg = () => { const c = {}; FIELDS.forEach(k => c[k] = $(k).value.trim()); c.offers = offers; c.active = active; c.fixImg = fixImg; c.memImg = imgs.mem; c.clsImg = imgs.cls; c.hrsImg = imgs.hrs; c.adOn = $('adOn').checked; return c; };
+
+/* ---------- logo ---------- */
+function processLogo(file) {
+  return new Promise((ok, fail) => {
+    const r = new FileReader();
+    r.onerror = () => fail();
+    r.onload = e => {
+      const img = new Image();
+      img.onerror = () => fail();
+      img.onload = () => {
+        const k = Math.min(1, 700 / Math.max(img.naturalWidth, img.naturalHeight));
+        const w = Math.round(img.naturalWidth * k), h = Math.round(img.naturalHeight * k);
+        const c = document.createElement('canvas'); c.width = w; c.height = h;
+        const x = c.getContext('2d'); x.drawImage(img, 0, 0, w, h);
+        const im = x.getImageData(0, 0, w, h), d = im.data, seen = new Uint8Array(w * h), q = [];
+        const white = i => d[i+3] > 0 && d[i] > 235 && d[i+1] > 235 && d[i+2] > 235;
+        const add = (px, py) => {
+          if (px < 0 || px >= w || py < 0 || py >= h) return;
+          const p = py * w + px; if (seen[p]) return; seen[p] = 1;
+          if (white(p * 4)) q.push(p);
+        };
+        for (let i = 0; i < w; i++) { add(i, 0); add(i, h - 1); }
+        for (let j = 0; j < h; j++) { add(0, j); add(w - 1, j); }
+        for (let n = 0; n < q.length; n++) {
+          const p = q[n], px = p % w, py = (p - px) / w;
+          d[p * 4 + 3] = 0; add(px+1, py); add(px-1, py); add(px, py+1); add(px, py-1);
+        }
+        x.putImageData(im, 0, 0); ok(c.toDataURL('image/png'));
+      };
+      img.src = e.target.result;
+    };
+    r.readAsDataURL(file);
+  });
+}
+const LOGOS = ['GYM LOGO.png', 'GYM LOGO.PNG', 'GYM LOGO.jpg', 'GYM LOGO.JPG', 'GYM LOGO.jpeg', 'GYM LOGO.webp'];
+async function findLogo(first) {
+  for (const u of [first, ...LOGOS].filter(Boolean)) {
+    try {
+      const r = await fetch(u);
+      if (r.ok && (r.headers.get('content-type') || '').startsWith('image')) return await processLogo(await r.blob());
+    } catch(e) {}
+  }
+  return '';
+}
+
+/* ---------- icons ---------- */
+const S = 'fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
+const ICON = {
+  wa:'<path d="M3 21l1.6-4.6A9 9 0 1 1 8 19.6L3 21z" '+S+'/><path d="M9 8.5c0 3 2.5 5.5 5.5 6.5l1.3-1.5-2-1-.8.8c-1-.4-2-1.4-2.4-2.4l.8-.8-1-2L9 8.5z" fill="#fff"/>',
+  ms:'<path d="M12 2.5C6.7 2.5 2.5 6.4 2.5 11.3c0 2.7 1.3 5 3.3 6.6v3.6l3-1.7c.9.3 1.8.4 2.7.4 5.3 0 9.5-3.9 9.5-8.9S17.3 2.5 12 2.5z" fill="#fff"/><path d="M6.5 14l3.6-4.2 2.6 2.2 3.8-2.2-3.7 4.4-2.6-2.2z" fill="#6a0a0a"/>',
+  fb:'<path d="M14 8V6.5c0-.7.3-1 1-1h1.5V2.5H14C11.5 2.5 10 4 10 6.3V8H8v3h2v9.5h4V11h2.3l.4-3H14z" fill="#fff"/>',
+  ig:'<rect x="3.5" y="3.5" width="17" height="17" rx="5" '+S+'/><circle cx="12" cy="12" r="4" '+S+'/><circle cx="17" cy="7" r="1.2" fill="#fff"/>',
+  tt:'<path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5M14 3c.4 2.6 2 4.2 5 4.5" '+S+'/>',
+  pin:'<path d="M12 2C8.7 2 6 4.6 6 7.9 6 12.4 12 21 12 21s6-8.6 6-13.1C18 4.6 15.3 2 12 2z" fill="#fff"/><circle cx="12" cy="8" r="2.4" fill="#6a0a0a"/>',
+  mem:'<rect x="2.5" y="5" width="19" height="14" rx="2.5" '+S+'/><circle cx="8.5" cy="11" r="2" fill="#fff"/><path d="M13 10h5M13 14h5" '+S+'/>',
+  cls:'<circle cx="9" cy="8" r="3.2" '+S+'/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6" '+S+'/><circle cx="17" cy="9" r="2.5" '+S+'/><path d="M17 14.5c2.4 0 4.5 1.9 4.5 4.5" '+S+'/>',
+  gift:'<rect x="3" y="9" width="18" height="12" rx="1.5" '+S+'/><path d="M12 9v12M3 14h18M12 9C9 9 7.5 7 8.5 5.5S12 5 12 9zM12 9c3 0 4.5-2 3.5-3.5S12 5 12 9z" '+S+'/>',
+  ad:'<path d="M4 10v4h3l5 4V6L7 10z" '+S+'/><path d="M15.5 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11" '+S+'/>',
+  hrs:'<circle cx="12" cy="12" r="9" '+S+'/><path d="M12 7v5l3.5 2" '+S+'/>',
+  faq:'<circle cx="12" cy="12" r="9" '+S+'/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7M12 17h.01" '+S+'/>',
+  book:'<rect x="3.5" y="5" width="17" height="15" rx="2.5" '+S+'/><path d="M3.5 10h17M8 3v4M16 3v4" '+S+'/>',
+  call:'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" '+S+'/>'
+};
+
+/* ---------- language ---------- */
+const I18N = {
+  ar: { explore: 'استكشف', mem: 'الاشتراكات', cls: 'الكلاسات الجماعية', hrs: 'مواعيد العمل', pin: 'الموقع', faq: 'الأسئلة', book: 'احجز أونلاين', contact: 'تواصل معنا', wa: 'واتساب', ms: 'ماسنجر', call: 'اتصال', follow: 'تابعنا', fb: 'فيسبوك', ig: 'انستجرام', tt: 'تيك توك', fac: 'المميزات', details: 'التفاصيل', bookNow: 'احجز الآن', send: 'إرسال سكرين التحويل', yname: 'اسمك', yphone: 'رقم موبايلك', bnote: 'هيفتح واتساب باسمك ورقمك. أرفق سكرين التحويل في المحادثة.', fill: 'اكتب اسمك ورقمك الأول.', offer: 'عرض', btn: 'EN' },
+  en: { explore: 'EXPLORE', mem: 'Memberships', cls: 'Group classes', hrs: 'Working hours', pin: 'Location', faq: 'Questions', book: 'Book online', contact: 'CONTACT US', wa: 'WhatsApp', ms: 'Messenger', call: 'Call', follow: 'FOLLOW US', fb: 'Facebook', ig: 'Instagram', tt: 'TikTok', fac: 'FACILITIES', details: 'Details', bookNow: 'BOOK NOW', send: 'SEND TRANSFER SCREENSHOT', yname: 'Your name', yphone: 'Your phone number', bnote: 'WhatsApp opens with your name and number. Attach your transfer screenshot in the chat.', fill: 'Please write your name and phone number first.', offer: 'Offer', btn: 'عربي' }
+};
+let lang = 'ar';
+try { lang = localStorage.getItem('glad-lang') === 'en' ? 'en' : 'ar'; } catch(e) {}
+
+/* ---------- gift scene (illustration) ---------- */
+const DEFS = '<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="gR" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff4d63"/><stop offset="1" stop-color="#a30018"/></linearGradient><linearGradient id="gW" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#cfcfcf"/></linearGradient><linearGradient id="gG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe08a"/><stop offset="1" stop-color="#e0a21a"/></linearGradient><radialGradient id="gL"><stop offset="0" stop-color="#ffb3be" stop-opacity=".55"/><stop offset="1" stop-color="#ffb3be" stop-opacity="0"/></radialGradient></defs></svg>';
+const SCENE = '<svg class="scn" viewBox="0 0 200 150" preserveAspectRatio="xMaxYMax meet">'
+ + '<circle cx="105" cy="78" r="70" fill="url(#gL)"/>'
+ + '<g class="f1"><rect x="62" y="64" width="84" height="68" rx="6" fill="url(#gR)"/><rect x="96" y="64" width="16" height="68" fill="url(#gG)"/><rect x="56" y="48" width="96" height="22" rx="5" fill="url(#gR)" stroke="#ff9aa8" stroke-opacity=".5"/><rect x="96" y="48" width="16" height="22" fill="url(#gG)"/><path d="M104 48C88 34 76 40 84 48 90 53 100 51 104 48Z" fill="url(#gG)"/><path d="M104 48C120 34 132 40 124 48 118 53 108 51 104 48Z" fill="url(#gG)"/><circle cx="104" cy="48" r="5" fill="#e0a21a"/></g>'
+ + '<g class="f2"><rect x="14" y="98" width="42" height="34" rx="4" fill="url(#gW)"/><rect x="31" y="98" width="8" height="34" fill="url(#gR)"/><rect x="10" y="88" width="50" height="14" rx="3" fill="url(#gW)"/><rect x="31" y="88" width="8" height="14" fill="url(#gR)"/><path d="M35 88C27 80 21 84 25 88 29 91 34 90 35 88ZM35 88C43 80 49 84 45 88 41 91 36 90 35 88Z" fill="url(#gR)"/></g>'
+ + '<g class="f3"><rect x="152" y="104" width="34" height="28" rx="4" fill="url(#gG)"/><rect x="165" y="104" width="8" height="28" fill="url(#gR)"/><rect x="148" y="96" width="42" height="12" rx="3" fill="url(#gG)"/><rect x="165" y="96" width="8" height="12" fill="url(#gR)"/><path d="M169 96C162 89 157 92 160 96 164 99 168 98 169 96ZM169 96C176 89 181 92 178 96 174 99 170 98 169 96Z" fill="url(#gR)"/></g>'
+ + '<path class="sp" d="M40 40l2.5 6 6 2.5-6 2.5L40 57l-2.5-6-6-2.5 6-2.5z" fill="#fff"/><path class="sp" d="M168 44l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#ffe08a"/><path class="sp" d="M150 22l1.6 4 4 1.6-4 1.6-1.6 4-1.6-4-4-1.6 4-1.6z" fill="#fff"/>'
+ + '<circle class="sp" cx="22" cy="70" r="2.5" fill="#ffe08a"/><circle class="sp" cx="186" cy="80" r="2.5" fill="#fff"/><circle class="sp" cx="80" cy="20" r="2" fill="#fff"/></svg>';
+
+/* ---------- image lightbox ---------- */
+const lb = $('lb'), ob = $('ob');
+function closeEl(el) { if (!el.classList.contains('on')) return; el.classList.add('out'); setTimeout(() => el.classList.remove('on', 'out'), 170); }
+function openLb(src) { $('lbImg').src = src; lb.classList.remove('out'); lb.classList.add('on'); }
+function fitCard() {
+  const c = document.querySelector('#obBox .ocard'); if (!c) return;
+  let fs = 18, sh = 150;
+  const apply = () => { c.style.setProperty('--fs', fs + 'px'); c.style.setProperty('--sh', sh + 'px'); };
+  apply();
+  while (c.scrollHeight > c.clientHeight + 1 && (sh > 40 || fs > 13)) { if (sh > 40) sh -= 15; else fs -= 1; apply(); }
+}
+function openOffer(o) {
+  const ar = /[\u0600-\u06FF]/.test((o.t || '') + (o.x || ''));
+  const art = o.kind === 'ad' ? `<svg class="scn" viewBox="0 0 24 24" style="opacity:.3">${ICON.ad}</svg>` : SCENE;
+  $('obBox').innerHTML = `<div class="ocard ${o.cls}${o.i ? ' hasimg' : ''}${ar ? ' ar' : ''}"${o.i ? ` style="--bg:url('${esc(o.i)}')"` : ''}><i class="x">&times;</i><div class="oh" dir="auto">${esc(o.t || I18N[lang].offer)}</div>${o.label ? `<div class="sub" dir="auto">${o.label}</div>` : ''}${o.x ? `<p dir="auto">${esc(o.x)}</p>` : ''}${art}</div>`;
+  ob.classList.remove('out'); ob.classList.add('on');
+  fitCard();
+}
+lb.onclick = () => closeEl(lb);
+ob.onclick = () => closeEl(ob);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeEl(lb); closeEl(ob); } });
+
+/* ---------- public page ---------- */
+function tile(key, label, href) {
+  return href ? `<a class="tile" href="${esc(href)}" target="_blank" rel="noopener"><span class="ic"><svg viewBox="0 0 24 24">${ICON[key]}</svg></span>${label}</a>` : '';
+}
+function renderPublic(c, logoSrc) {
+  const num = waDigits(c.wa);
+  const T = I18N[lang];
+  const g = k => lang === 'en' ? (c[k + '_en'] || c[k] || '') : (c[k] || c[k + '_en'] || '');
+  $('pub').dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.documentElement.lang = lang;
+  const cur = (c.offers || []).find(o => o.id === c.active);
+  const hasOffer = cur && (cur.title || cur.text || cur.titleEn || cur.textEn || cur.image);
+  const ot = cur ? (lang === 'en' ? (cur.titleEn || cur.title) : (cur.title || cur.titleEn)) : '';
+  const ox = cur ? (lang === 'en' ? (cur.textEn || cur.text) : (cur.text || cur.textEn)) : '';
+  const hasFix = g('fixTitle') || g('fixText') || c.fixImg;
+  const od = [];
+  const card = (cls, label, t, x, i) => { od.push({ cls, label, t, x, i }); return `<div class="offer ${cls}${/[\u0600-\u06FF]/.test((t || '') + (x || '')) ? ' ar' : ''}" data-n="${od.length - 1}">${SCENE}<div class="oh" dir="auto">${esc(t || T.offer)}</div><div class="hint">${T.details}</div></div>`; };
+  const imgTile = (ic, label, key) => `<a class="tile" href="#" data-img="${key}"><span class="ic"><svg viewBox="0 0 24 24">${ICON[ic]}</svg></span>${label}</a>`;
+  const banner = c.adOn && g('adText') ? `<div class="ad${g('adDetails') ? ' tap' : ''}"><i class="ai"><svg viewBox="0 0 24 24">${ICON.ad}</svg></i><span dir="auto">${esc(g('adText'))}</span>${g('adDetails') ? '<span class="hint">' + T.details + '</span>' : ''}</div>` : '';
+  const hasBook = g('bookText') || c.bookLink;
+  const box = (ic, label, id) => `<a class="tile" href="#${id}" data-box="${id}"><span class="ic"><svg viewBox="0 0 24 24">${ICON[ic]}</svg></span>${label}</a>`;
+  const services = (g('services') || '').split('\n').map(s => s.trim()).filter(Boolean);
+  const faqs = (g('faq') || '').split(/\n\s*\n/).map(b => b.trim().split('\n')).filter(a => a[0] && a.slice(1).join('').trim()).map(a => [a[0].trim(), a.slice(1).join('\n').trim()]);
+  $('pub').innerHTML = `
+  <div class="topbar"><button class="lang" id="langBtn">${T.btn}</button></div>
+  <div class="hero">
+    <div class="hrow">${logoSrc ? `<img src="${esc(logoSrc)}" alt="" onerror="this.remove()">` : ''}<div class="ht"><div class="t1">GLADIATORS</div><div class="t2">GYM &amp; SPA</div>${g('tag') ? `<div class="tg" dir="auto">${esc(g('tag'))}</div>` : ''}</div></div>
+  </div>
+  ${banner}
+  ${hasFix || hasOffer ? `<div class="offers">${DEFS}${hasFix ? card('fixed', '', g('fixTitle'), g('fixText'), c.fixImg) : ''}${hasOffer ? card('', '', ot, ox, cur.image) : ''}</div>` : ''}
+  <h3>${T.explore}</h3>
+  <div class="grid">${c.memImg ? imgTile('mem', T.mem, 'mem') : ''}${c.clsImg ? imgTile('cls', T.cls, 'cls') : ''}${c.hrsImg ? imgTile('hrs', T.hrs, 'hrs') : ''}${tile('pin', T.pin, c.map)}${faqs.length ? box('faq', T.faq, 'faqBox') : ''}${hasBook ? box('book', T.book, 'bookBox') : ''}</div>
+  ${faqs.length ? `<div class="qa xbox" id="faqBox" style="display:none">${faqs.map(f => `<details><summary dir="auto">${esc(f[0])}</summary><p dir="auto">${esc(f[1])}</p></details>`).join('')}</div>` : ''}
+  ${hasBook ? `<div class="book xbox" id="bookBox" style="display:none">
+    ${g('bookText') ? `<p dir="auto">${esc(g('bookText'))}</p>` : ''}
+    ${c.bookLink ? `<a class="cta" href="${esc(c.bookLink)}" target="_blank" rel="noopener">${T.bookNow}</a>` : ''}
+    ${num ? `<input id="bkName" type="text" placeholder="${T.yname}" dir="auto"><input id="bkPhone" type="text" inputmode="tel" placeholder="${T.yphone}"><button class="cta ghost" id="bkSend">${T.send}</button><div class="bnote">${T.bnote}</div>` : ''}
+  </div>` : ''}
+  <h3>${T.contact}</h3>
+  <div class="grid">${tile('wa', T.wa, num && 'https://wa.me/' + num)}${tile('ms', T.ms, c.ms && 'https://m.me/' + c.ms)}${tile('call', T.call, num && 'tel:+' + num)}</div>
+  <h3>${T.follow}</h3>
+  <div class="grid">${tile('fb', T.fb, c.fb)}${tile('ig', T.ig, c.ig)}${tile('tt', T.tt, c.tt)}</div>
+  ${services.length ? `<h3>${T.fac}</h3><div class="chips">${services.map(s => `<span dir="auto">${esc(s)}</span>`).join('')}</div>` : ''}
+  <div class="foot">GLADIATORS GYM &amp; SPA</div>`;
+
+  document.querySelectorAll('[data-img]').forEach(t => t.onclick = e => { e.preventDefault(); openLb(c[t.dataset.img + 'Img']); });
+  document.querySelectorAll('.offer').forEach(o => o.onclick = () => openOffer(od[+o.dataset.n]));
+  const adEl = document.querySelector('.ad.tap');
+  if (adEl) adEl.onclick = () => openOffer({ cls: 'adc', t: g('adText'), x: g('adDetails'), i: '', kind: 'ad' });
+  document.querySelectorAll('.qa details').forEach(d => d.addEventListener('toggle', () => { if (d.open) document.querySelectorAll('.qa details').forEach(z => { if (z !== d) z.open = false; }); }));
+  document.querySelectorAll('[data-box]').forEach(t => t.onclick = e => {
+    e.preventDefault();
+    const x = $(t.dataset.box), open = x.style.display === 'block';
+    document.querySelectorAll('.xbox').forEach(z => z.style.display = 'none');
+    if (!open) { x.style.display = 'block'; x.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+  });
+  const bs = $('bkSend');
+  if (bs) bs.onclick = () => {
+    const n = $('bkName').value.trim(), ph = $('bkPhone').value.trim();
+    if (!n || !ph) { alert(T.fill); return; }
+    const m = 'مرحباً، دي صورة تحويل حجز اشتراك في Gladiators Gym & Spa.\nالاسم: ' + n + '\nالرقم: ' + ph + '\n(سكرين التحويل مرفق)';
+    window.open('https://wa.me/' + num + '?text=' + encodeURIComponent(m), '_blank');
+  };
+  $('langBtn').onclick = () => {
+    lang = lang === 'ar' ? 'en' : 'ar';
+    try { localStorage.setItem('glad-lang', lang); } catch(e) {}
+    closeEl(ob); closeEl(lb);
+    const y = window.scrollY; renderPublic(c, logoSrc); window.scrollTo(0, y);
+  };
+}
+
+/* ---------- offers list (admin) ---------- */
+function shrink(file, max = 800) {
+  return new Promise((ok, fail) => {
+    const r = new FileReader(); r.onerror = fail;
+    r.onload = e => {
+      const img = new Image(); img.onerror = fail;
+      img.onload = () => {
+        const k = Math.min(1, max / Math.max(img.naturalWidth, img.naturalHeight));
+        const c = document.createElement('canvas'); c.width = Math.round(img.naturalWidth * k); c.height = Math.round(img.naturalHeight * k);
+        const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height); x.drawImage(img, 0, 0, c.width, c.height);
+        ok(c.toDataURL('image/jpeg', max > 800 ? 0.78 : 0.72));
+      };
+      img.src = e.target.result;
+    };
+    r.readAsDataURL(file);
+  });
+}
+function imgPicker(parent, value, set, max) {
+  parent.innerHTML = `${value ? `<img class="pimg" src="${esc(value)}" alt="">` : ''}<div class="btns" style="margin-top:0"><button type="button" class="alt" data-p="pick">${value ? 'CHANGE IMAGE' : 'CHOOSE IMAGE'}</button>${value ? '<button type="button" class="alt" data-p="del">REMOVE IMAGE</button>' : ''}</div><input type="file" accept="image/*" style="display:none">`;
+  const f = parent.querySelector('input');
+  parent.querySelector('[data-p=pick]').onclick = () => f.click();
+  f.onchange = async () => { if (f.files[0]) { try { set(await shrink(f.files[0], max)); } catch(e) { alert('Could not read this image.'); } } };
+  const d = parent.querySelector('[data-p=del]'); if (d) d.onclick = () => set('');
+}
+function renderImgs() { [['mem', 'memP'], ['cls', 'clsP'], ['hrs', 'hrsP']].forEach(([k, id]) => imgPicker($(id), imgs[k], v => { imgs[k] = v; persist(); renderImgs(); }, 1000)); }
+function renderFix() { imgPicker($('fixImgBox'), fixImg, v => { fixImg = v; persist(); renderFix(); }); }
+function persist() {
+  try { const s = { logo, offers, active, fixImg, imgs, adOn: $('adOn').checked }; SAVE.forEach(k => s[k] = $(k).value); localStorage.setItem(KEY, JSON.stringify(s)); } catch(e) {}
+}
+function renderOffers() {
+  const box = $('offList'); box.innerHTML = '';
+  if (!offers.length) box.innerHTML = '<div class="note">No offers yet. Press + ADD OFFER.</div>';
+  offers.forEach(o => {
+    const on = o.id === active, d = document.createElement('div');
+    d.className = 'off' + (on ? ' on' : '');
+    d.innerHTML = `${on ? '<span class="badge">SHOWING NOW</span>' : ''}
+      <label>Offer title</label><input type="text" data-k="title" value="${esc(o.title)}"><input type="text" data-k="titleEn" placeholder="English title (optional)" dir="ltr" style="margin-top:8px" value="${esc(o.titleEn)}">
+      <label>Offer details</label><textarea data-k="text">${esc(o.text)}</textarea><textarea data-k="textEn" placeholder="English details (optional)" dir="ltr" style="margin-top:8px">${esc(o.textEn)}</textarea>
+      <label>Offer image (optional)</label><div data-p="img"></div>
+      <div class="btns"><button data-a="show"${on ? ' class="alt"' : ''}>${on ? 'SHOWING' : 'SHOW THIS OFFER'}</button><button data-a="del" class="alt">DELETE</button></div>`;
+    imgPicker(d.querySelector('[data-p=img]'), o.image, v => { o.image = v; persist(); renderOffers(); });
+    d.querySelectorAll('[data-k]').forEach(i => i.oninput = () => { o[i.dataset.k] = i.value.trim(); persist(); });
+    d.querySelector('[data-a=show]').onclick = () => { active = o.id; persist(); renderOffers(); };
+    d.querySelector('[data-a=del]').onclick = () => {
+      if (!confirm('Delete this offer?')) return;
+      offers = offers.filter(x => x.id !== o.id); if (active === o.id) active = ''; persist(); renderOffers();
+    };
+    box.appendChild(d);
+  });
+}
+$('addOffer').onclick = () => { offers.push({ id: uid(), title: '', text: '', image: '' }); persist(); renderOffers(); };
+$('hideOffer').onclick = () => { active = ''; persist(); renderOffers(); };
+
+/* ---------- admin actions ---------- */
+$('prev').onclick = () => { renderPublic(cfg(), logo || $('logoUrl').value.trim()); $('admin').style.display = 'none'; $('pub').style.display = 'block'; $('back').style.display = 'block'; scrollTo(0, 0); };
+$('back').onclick = () => { $('pub').style.display = 'none'; $('back').style.display = 'none'; $('admin').style.display = 'block'; };
+$('save').onclick = () => {
+  const c = cfg(); delete c.host;
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(c, null, 2)], { type: 'application/json' }));
+  a.download = 'gym.json'; a.click();
+};
+const pageLink = () => { let b = $('host').value.trim(); if (!b && /^https?:/.test(location.protocol)) b = location.origin + location.pathname; return b.split('?')[0]; };
+$('cp').onclick = async () => {
+  const l = pageLink(); if (!l) { alert('Paste the hosted page address in Gym info first.'); return; }
+  try { await navigator.clipboard.writeText(l); $('cp').textContent = 'COPIED'; setTimeout(() => $('cp').textContent = 'COPY PAGE LINK', 1500); } catch(e) { prompt('Copy this link:', l); }
+};
+$('wsend').onclick = () => {
+  const l = pageLink(); if (!l) { alert('Paste the hosted page address in Gym info first.'); return; }
+  window.open('https://wa.me/?text=' + encodeURIComponent('Gladiators Gym & Spa - الأسعار والمواعيد والعروض:\n' + l), '_blank');
+};
+$('logoBtn').onclick = () => $('logoFile').click();
+$('logoFile').onchange = async () => {
+  const f = $('logoFile').files[0]; if (!f) return;
+  try { logo = await processLogo(f); persist(); alert('Logo loaded. Press PREVIEW PAGE to see it.'); } catch(e) { alert('Could not process the logo.'); }
+};
+
+/* ---------- start ---------- */
+const normalize = j => {
+  if (!j.offers && (j.offTitle || j.offText || j.offImg)) { const id = uid(); j.offers = [{ id, title: j.offTitle || '', text: j.offText || '', image: j.offImg || '' }]; j.active = id; }
+  j.offers = j.offers || []; j.active = j.active || '';
+  return j;
+};
+const hosted = /^https?:/.test(location.protocol);
+const isAdmin = !hosted || new URLSearchParams(location.search).has('admin');
+const getJSON = () => fetch('gym.json?t=' + Date.now(), { cache: 'no-store' }).then(r => { if (!r.ok) throw 0; return r.json(); }).then(normalize);
+
+if (isAdmin) {
+  try { const s = JSON.parse(localStorage.getItem(KEY) || '{}'); SAVE.forEach(k => { if (s[k]) $(k).value = s[k]; }); logo = s.logo || ''; offers = s.offers || []; active = s.active || ''; fixImg = s.fixImg || ''; imgs = s.imgs || imgs; $('adOn').checked = !!s.adOn; } catch(e) {}
+  $('admin').style.display = 'block';
+  FIELDS.forEach(k => $(k).addEventListener('input', persist));
+  $('adOn').addEventListener('change', persist);
+  renderOffers(); renderFix(); renderImgs();
+  if (hosted) {
+    getJSON().then(j => { SAVE.forEach(k => { if (j[k] !== undefined) $(k).value = j[k]; }); offers = j.offers; active = j.active; fixImg = j.fixImg || ''; imgs = { mem: j.memImg || '', cls: j.clsImg || '', hrs: j.hrsImg || '' }; $('adOn').checked = !!j.adOn; renderOffers(); renderFix(); renderImgs(); persist(); }).catch(() => {});
+    if (!logo) findLogo($('logoUrl').value.trim()).then(x => { if (x) { logo = x; persist(); } });
+  }
+} else {
+  getJSON().catch(() => ({ offers: [] })).then(async j => {
+    renderPublic(j, '');
+    const l = await findLogo(j.logoUrl);
+    if (l) renderPublic(j, l);
+  });
+}
+</script>
+</body>
+</html>
