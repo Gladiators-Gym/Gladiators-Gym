@@ -4,14 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gladiators Gym &amp; Spa</title>
-<meta name="description" content="الاشتراكات والكلاسات والمواعيد والعروض | Memberships, classes, hours and offers">
+<meta name="description" content="Memberships, group classes, working hours, offers and online booking at Gladiators Gym &amp; Spa">
 <meta name="theme-color" content="#000000">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Gladiators Gym &amp; Spa">
 <meta property="og:title" content="Gladiators Gym &amp; Spa">
-<meta property="og:description" content="الاشتراكات • الكلاسات • المواعيد • العروض — اعرف كل التفاصيل واحجز أونلاين">
+<meta property="og:description" content="Memberships • Classes • Working hours • Offers — see all the details and book online">
 <!-- IMPORTANT: replace Gladiators-Gym.github.io below with your real site address (with https://, no trailing slash). Example: https://yourname.github.io/gladiators -->
+<meta property="og:url" content="https://Gladiators-Gym.github.io/">
+<meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://Gladiators-Gym.github.io/og-image.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:alt" content="Gladiators Gym &amp; Spa">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -53,10 +57,10 @@ button:hover{filter:brightness(1.15)}
 .cta.ghost{background:transparent;border:1.5px solid #ff2a2a}
 h3{margin:26px 0 10px;font-size:13px;letter-spacing:4px;color:#ff4a5a;display:flex;align-items:center;gap:10px}
 h3:after{content:"";flex:1;height:1px;background:rgba(255,255,255,.2)}
-.ad{position:relative;overflow:hidden;width:92%;min-height:88px;margin:14px auto 0;padding:18px 16px;border:1.5px solid #fff;border-radius:16px;background:linear-gradient(120deg,#c3122b,#6d0816);box-shadow:0 0 22px rgba(255,42,42,.55);display:flex;gap:12px;align-items:center;justify-content:center;text-align:center;font-size:17px;font-weight:bold;line-height:1.5}
+.ad{position:relative;overflow:hidden;width:92%;min-height:96px;margin:14px auto 0;padding:20px 16px;border:1.5px solid #fff;border-radius:16px;background:linear-gradient(120deg,#c3122b,#6d0816);box-shadow:0 0 22px rgba(255,42,42,.55);display:flex;gap:12px;align-items:center;justify-content:center;text-align:center;font-size:22px;font-weight:bold;line-height:1.45}
 .ad:after{content:"";position:absolute;top:0;bottom:0;width:60px;left:-90px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);transform:skewX(-20deg);animation:shine 4.5s ease-in-out infinite}
-.ad .ai{width:42px;height:42px;border-radius:50%;background:#e01616;border:2px solid #fff;display:grid;place-items:center;flex:none;animation:pulse 2s ease-in-out infinite}
-.ad .ai svg{width:22px;height:22px}
+.ad .ai{width:48px;height:48px;border-radius:50%;background:#e01616;border:2px solid #fff;display:grid;place-items:center;flex:none;animation:pulse 2s ease-in-out infinite}
+.ad .ai svg{width:26px;height:26px}
 .ad.tap{cursor:pointer}
 .ad .hint{flex:none;padding:4px 14px;border:1px solid rgba(255,255,255,.85);border-radius:14px;font-size:12px;font-weight:normal;background:rgba(0,0,0,.25)}
 @keyframes shine{0%,55%{left:-90px}100%{left:115%}}
@@ -122,6 +126,8 @@ h3:after{content:"";flex:1;height:1px;background:rgba(255,255,255,.2)}
 .hero{direction:ltr}
 .offer:not(.ar){direction:ltr}
 #pub[dir=rtl] h3{letter-spacing:0;font-size:15px}
+.lt{display:block;color:#999;font-size:12px;margin:8px 0 3px}
+.offer.nodet{cursor:default}
 .foot{margin-top:30px;text-align:center;color:#888;font-size:12px;letter-spacing:2px}
 </style>
 </head>
@@ -219,10 +225,20 @@ Yes, please contact us on WhatsApp.</textarea>
 const $ = id => document.getElementById(id);
 const FIELDS = ['host','logoUrl','tag','wa','ms','fb','ig','tt','map','services','fixTitle','fixText','bookText','bookLink','faq','adText','adDetails','tag_en','services_en','fixTitle_en','fixText_en','bookText_en','faq_en','adText_en','adDetails_en'];
 const SAVE = FIELDS.filter(k => k !== 'host');
+const DEF = {
+  fixTitle: ['الصحاب والعيلة', 'Friends & Family'],
+  fixText: ['تعالى مع صحابك أو عيلتك واستفيدوا بسعر خاص للمجموعات. اسألنا عن التفاصيل.', 'Come with your friends or family and enjoy a special group price. Ask us for details.'],
+  bookText: ['١. اختار الاشتراك من قسم الاشتراكات.\n٢. حوّل قيمة الاشتراك (فودافون كاش / إنستاباي).\n٣. اكتب اسمك ورقمك (وكود العضوية لو بتجدد) تحت.\n٤. ابعتلنا سكرين التحويل على واتساب.\n٥. هنأكد حجزك وكارتك هيبقى جاهز.', '1. Choose your membership from the Memberships tile.\n2. Transfer the subscription fee (Vodafone Cash / InstaPay).\n3. Write your name and phone number (and your member ID if you are renewing) below.\n4. Send us the transfer screenshot on WhatsApp.\n5. We confirm your booking and your card is ready.'],
+  faq: ['مواعيد الجيم إيه؟\nكل يوم من 10 صباحًا لـ 12 منتصف الليل.\n\nفي حصة تجريبية؟\nأيوه، حصة مجانية واحدة للأعضاء الجدد.\n\nينفع أجمّد اشتراكي؟\nأيوه، كلمنا على واتساب.', 'What are the working hours?\nEvery day from 10 AM to 12 AM.\n\nIs there a free trial session?\nYes, one free session for new members.\n\nCan I freeze my membership?\nYes, please contact us on WhatsApp.']
+};
 ['tag', 'services', 'fixTitle', 'fixText', 'bookText', 'faq', 'adText', 'adDetails'].forEach(k => {
   const el = $(k), n = el.cloneNode(false);
-  n.id = k + '_en'; n.removeAttribute('value'); n.value = ''; n.placeholder = 'English version (optional)'; n.dir = 'ltr'; n.style.marginTop = '8px';
-  el.insertAdjacentElement('afterend', n);
+  n.id = k + '_en'; n.removeAttribute('value'); n.value = ''; n.dir = 'ltr'; n.placeholder = 'English version';
+  if (DEF[k]) { el.value = DEF[k][0]; n.value = DEF[k][1]; }
+  el.placeholder = 'النسخة العربية'; el.dir = 'auto';
+  const c1 = document.createElement('small'); c1.className = 'lt'; c1.textContent = 'English (default)';
+  const c2 = document.createElement('small'); c2.className = 'lt'; c2.textContent = 'العربية (Arabic)';
+  el.insertAdjacentElement('beforebegin', c1); el.insertAdjacentElement('beforebegin', n); el.insertAdjacentElement('beforebegin', c2);
 });
 const KEY = 'glad-page-1';
 let logo = '', offers = [], active = '', fixImg = '', imgs = { mem: '', cls: '', hrs: '' };
@@ -296,11 +312,11 @@ const ICON = {
 
 /* ---------- language ---------- */
 const I18N = {
-  ar: { explore: 'استكشف', mem: 'الاشتراكات', cls: 'الكلاسات الجماعية', hrs: 'مواعيد العمل', pin: 'الموقع', faq: 'الأسئلة', book: 'احجز أونلاين', contact: 'تواصل معنا', wa: 'واتساب', ms: 'ماسنجر', call: 'اتصال', follow: 'تابعنا', fb: 'فيسبوك', ig: 'انستجرام', tt: 'تيك توك', fac: 'المميزات', details: 'التفاصيل', bookNow: 'احجز الآن', send: 'إرسال سكرين التحويل', yname: 'اسمك', yphone: 'رقم موبايلك', bnote: 'هيفتح واتساب باسمك ورقمك. أرفق سكرين التحويل في المحادثة.', fill: 'اكتب اسمك ورقمك الأول.', offer: 'عرض', btn: 'EN' },
-  en: { explore: 'EXPLORE', mem: 'Memberships', cls: 'Group classes', hrs: 'Working hours', pin: 'Location', faq: 'Questions', book: 'Book online', contact: 'CONTACT US', wa: 'WhatsApp', ms: 'Messenger', call: 'Call', follow: 'FOLLOW US', fb: 'Facebook', ig: 'Instagram', tt: 'TikTok', fac: 'FACILITIES', details: 'Details', bookNow: 'BOOK NOW', send: 'SEND TRANSFER SCREENSHOT', yname: 'Your name', yphone: 'Your phone number', bnote: 'WhatsApp opens with your name and number. Attach your transfer screenshot in the chat.', fill: 'Please write your name and phone number first.', offer: 'Offer', btn: 'عربي' }
+  ar: { explore: 'استكشف', mem: 'الاشتراكات', cls: 'الكلاسات الجماعية', hrs: 'مواعيد العمل', pin: 'الموقع', faq: 'الأسئلة', book: 'احجز أونلاين', contact: 'تواصل معنا', wa: 'واتساب', ms: 'ماسنجر', call: 'اتصال', follow: 'تابعنا', fb: 'فيسبوك', ig: 'انستجرام', tt: 'تيك توك', fac: 'المميزات', details: 'التفاصيل', bookNow: 'احجز الآن', send: 'إرسال سكرين التحويل', yname: 'اسمك', yphone: 'رقم موبايلك', yid: 'كود العضوية (لو بتجدد)', bnote: 'هيفتح واتساب باسمك ورقمك. أرفق سكرين التحويل في المحادثة.', fill: 'اكتب اسمك ورقمك الأول.', offer: 'عرض', btn: 'EN' },
+  en: { explore: 'EXPLORE', mem: 'Memberships', cls: 'Group classes', hrs: 'Working hours', pin: 'Location', faq: 'Questions', book: 'Book online', contact: 'CONTACT US', wa: 'WhatsApp', ms: 'Messenger', call: 'Call', follow: 'FOLLOW US', fb: 'Facebook', ig: 'Instagram', tt: 'TikTok', fac: 'FACILITIES', details: 'Details', bookNow: 'BOOK NOW', send: 'SEND TRANSFER SCREENSHOT', yname: 'Your name', yphone: 'Your phone number', yid: 'Member ID (only if renewing)', bnote: 'WhatsApp opens with your name and number. Attach your transfer screenshot in the chat.', fill: 'Please write your name and phone number first.', offer: 'Offer', btn: 'عربي' }
 };
-let lang = 'ar';
-try { lang = localStorage.getItem('glad-lang') === 'en' ? 'en' : 'ar'; } catch(e) {}
+let lang = 'en';
+try { lang = localStorage.getItem('glad-lang') === 'ar' ? 'ar' : 'en'; } catch(e) {}
 
 /* ---------- gift scene (illustration) ---------- */
 const DEFS = '<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="gR" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff4d63"/><stop offset="1" stop-color="#a30018"/></linearGradient><linearGradient id="gW" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#cfcfcf"/></linearGradient><linearGradient id="gG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe08a"/><stop offset="1" stop-color="#e0a21a"/></linearGradient><radialGradient id="gL"><stop offset="0" stop-color="#ffb3be" stop-opacity=".55"/><stop offset="1" stop-color="#ffb3be" stop-opacity="0"/></radialGradient></defs></svg>';
@@ -350,7 +366,7 @@ function renderPublic(c, logoSrc) {
   const ox = cur ? (lang === 'en' ? (cur.textEn || cur.text) : (cur.text || cur.textEn)) : '';
   const hasFix = g('fixTitle') || g('fixText') || c.fixImg;
   const od = [];
-  const card = (cls, label, t, x, i) => { od.push({ cls, label, t, x, i }); return `<div class="offer ${cls}${/[\u0600-\u06FF]/.test((t || '') + (x || '')) ? ' ar' : ''}" data-n="${od.length - 1}">${SCENE}<div class="oh" dir="auto">${esc(t || T.offer)}</div><div class="hint">${T.details}</div></div>`; };
+  const card = (cls, label, t, x, i) => { od.push({ cls, label, t, x, i }); const det = !!(x || i); return `<div class="offer ${cls}${/[\u0600-\u06FF]/.test((t || '') + (x || '')) ? ' ar' : ''}${det ? '' : ' nodet'}" data-n="${od.length - 1}">${SCENE}<div class="oh" dir="auto">${esc(t || T.offer)}</div>${det ? `<div class="hint">${T.details}</div>` : ''}</div>`; };
   const imgTile = (ic, label, key) => `<a class="tile" href="#" data-img="${key}"><span class="ic"><svg viewBox="0 0 24 24">${ICON[ic]}</svg></span>${label}</a>`;
   const banner = c.adOn && g('adText') ? `<div class="ad${g('adDetails') ? ' tap' : ''}"><i class="ai"><svg viewBox="0 0 24 24">${ICON.ad}</svg></i><span dir="auto">${esc(g('adText'))}</span>${g('adDetails') ? '<span class="hint">' + T.details + '</span>' : ''}</div>` : '';
   const hasBook = g('bookText') || c.bookLink;
@@ -370,7 +386,7 @@ function renderPublic(c, logoSrc) {
   ${hasBook ? `<div class="book xbox" id="bookBox" style="display:none">
     ${g('bookText') ? `<p dir="auto">${esc(g('bookText'))}</p>` : ''}
     ${c.bookLink ? `<a class="cta" href="${esc(c.bookLink)}" target="_blank" rel="noopener">${T.bookNow}</a>` : ''}
-    ${num ? `<input id="bkName" type="text" placeholder="${T.yname}" dir="auto"><input id="bkPhone" type="text" inputmode="tel" placeholder="${T.yphone}"><button class="cta ghost" id="bkSend">${T.send}</button><div class="bnote">${T.bnote}</div>` : ''}
+    ${num ? `<input id="bkName" type="text" placeholder="${T.yname}" dir="auto"><input id="bkPhone" type="text" inputmode="tel" placeholder="${T.yphone}"><input id="bkId" type="text" placeholder="${T.yid}"><button class="cta ghost" id="bkSend">${T.send}</button><div class="bnote">${T.bnote}</div>` : ''}
   </div>` : ''}
   <h3>${T.contact}</h3>
   <div class="grid">${tile('wa', T.wa, num && 'https://wa.me/' + num)}${tile('ms', T.ms, c.ms && 'https://m.me/' + c.ms)}${tile('call', T.call, num && 'tel:+' + num)}</div>
@@ -380,7 +396,7 @@ function renderPublic(c, logoSrc) {
   <div class="foot">GLADIATORS GYM &amp; SPA</div>`;
 
   document.querySelectorAll('[data-img]').forEach(t => t.onclick = e => { e.preventDefault(); openLb(c[t.dataset.img + 'Img']); });
-  document.querySelectorAll('.offer').forEach(o => o.onclick = () => openOffer(od[+o.dataset.n]));
+  document.querySelectorAll('.offer:not(.nodet)').forEach(o => o.onclick = () => openOffer(od[+o.dataset.n]));
   const adEl = document.querySelector('.ad.tap');
   if (adEl) adEl.onclick = () => openOffer({ cls: 'adc', t: g('adText'), x: g('adDetails'), i: '', kind: 'ad' });
   document.querySelectorAll('.qa details').forEach(d => d.addEventListener('toggle', () => { if (d.open) document.querySelectorAll('.qa details').forEach(z => { if (z !== d) z.open = false; }); }));
@@ -394,7 +410,8 @@ function renderPublic(c, logoSrc) {
   if (bs) bs.onclick = () => {
     const n = $('bkName').value.trim(), ph = $('bkPhone').value.trim();
     if (!n || !ph) { alert(T.fill); return; }
-    const m = 'مرحباً، دي صورة تحويل حجز اشتراك في Gladiators Gym & Spa.\nالاسم: ' + n + '\nالرقم: ' + ph + '\n(سكرين التحويل مرفق)';
+    const idv = $('bkId').value.trim();
+    const m = 'مرحباً، دي صورة تحويل ' + (idv ? 'تجديد' : 'حجز') + ' اشتراك في Gladiators Gym & Spa.\nالاسم: ' + n + '\nالرقم: ' + ph + (idv ? '\nكود العضوية (ID): ' + idv : '') + '\n(سكرين التحويل مرفق)';
     window.open('https://wa.me/' + num + '?text=' + encodeURIComponent(m), '_blank');
   };
   $('langBtn').onclick = () => {
@@ -441,8 +458,8 @@ function renderOffers() {
     const on = o.id === active, d = document.createElement('div');
     d.className = 'off' + (on ? ' on' : '');
     d.innerHTML = `${on ? '<span class="badge">SHOWING NOW</span>' : ''}
-      <label>Offer title</label><input type="text" data-k="title" value="${esc(o.title)}"><input type="text" data-k="titleEn" placeholder="English title (optional)" dir="ltr" style="margin-top:8px" value="${esc(o.titleEn)}">
-      <label>Offer details</label><textarea data-k="text">${esc(o.text)}</textarea><textarea data-k="textEn" placeholder="English details (optional)" dir="ltr" style="margin-top:8px">${esc(o.textEn)}</textarea>
+      <label>Offer title</label><small class="lt">English (default)</small><input type="text" data-k="titleEn" placeholder="English title" dir="ltr" value="${esc(o.titleEn)}"><small class="lt">العربية (Arabic)</small><input type="text" data-k="title" dir="auto" placeholder="العنوان بالعربي" value="${esc(o.title)}">
+      <label>Offer details</label><small class="lt">English (default)</small><textarea data-k="textEn" placeholder="English details" dir="ltr">${esc(o.textEn)}</textarea><small class="lt">العربية (Arabic)</small><textarea data-k="text" dir="auto" placeholder="التفاصيل بالعربي">${esc(o.text)}</textarea>
       <label>Offer image (optional)</label><div data-p="img"></div>
       <div class="btns"><button data-a="show"${on ? ' class="alt"' : ''}>${on ? 'SHOWING' : 'SHOW THIS OFFER'}</button><button data-a="del" class="alt">DELETE</button></div>`;
     imgPicker(d.querySelector('[data-p=img]'), o.image, v => { o.image = v; persist(); renderOffers(); });
@@ -495,6 +512,14 @@ const getJSON = () => fetch('gym.json?t=' + Date.now(), { cache: 'no-store' }).t
 if (isAdmin) {
   try { const s = JSON.parse(localStorage.getItem(KEY) || '{}'); SAVE.forEach(k => { if (s[k]) $(k).value = s[k]; }); logo = s.logo || ''; offers = s.offers || []; active = s.active || ''; fixImg = s.fixImg || ''; imgs = s.imgs || imgs; $('adOn').checked = !!s.adOn; } catch(e) {}
   $('admin').style.display = 'block';
+  const ogm = document.querySelector('meta[property="og:image"]');
+  const PH = 'YOUR-SITE' + '-ADDRESS';
+  if (ogm && ogm.content.includes(PH)) {
+    const w = document.createElement('div');
+    w.style.cssText = 'background:#5a0612;border:1px solid #ff2a2a;border-radius:8px;padding:10px 12px;color:#fff;margin-bottom:12px;font-size:13px;line-height:1.6';
+    w.textContent = 'Link preview is NOT set up yet: open index.html in Notepad, press Ctrl+H and replace ' + PH + ' with your real site address (Replace All), upload index.html again, and make sure og-image.jpg is uploaded too.';
+    $('admin').querySelector('.controls').prepend(w);
+  }
   FIELDS.forEach(k => $(k).addEventListener('input', persist));
   $('adOn').addEventListener('change', persist);
   renderOffers(); renderFix(); renderImgs();
