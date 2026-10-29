@@ -147,7 +147,7 @@ h3:after{content:"";flex:1;height:1px;background:rgba(255,255,255,.2)}
   <h2>GLADIATORS PAGE ADMIN</h2>
   <details open>
    <summary>Gym info</summary>
-   <label for="host">Hosted page address (where you uploaded index.html)</label><input id="host" type="text" placeholder="https://your-name.github.io/gladiators/">
+   <label>Hosted page address (where you uploaded index.html)</label><input id="host" type="text" placeholder="https://your-name.github.io/gladiators/">
    <label>Logo file name (same folder as index.html)</label><input id="logoUrl" type="text" value="GYM LOGO.png">
    <label>Short line under the logo</label><input id="tag" type="text" placeholder="Open every day 10 AM - 12 AM">
    <label>WhatsApp number (like 01012345678)</label><input id="wa" type="text" value="01090819150">
@@ -341,7 +341,7 @@ const SCENE = '<svg class="scn" viewBox="0 0 200 150" preserveAspectRatio="xMaxY
 /* ---------- image lightbox ---------- */
 const lb = $('lb'), ob = $('ob');
 function closeEl(el) { if (!el.classList.contains('on')) return; el.classList.add('out'); setTimeout(() => el.classList.remove('on', 'out'), 170); }
-function openLb(src) { const im = $('lbImg'), v = $('lbVideo'); v.pause(); v.removeAttribute('src'); v.load(); v.style.display = 'none'; $('adSlideText').style.display = 'none'; $('adSlidePrev').style.display = 'none'; $('adSlideNext').style.display = 'none'; $('videoPrev').style.display = 'none'; $('videoNext').style.display = 'none'; $('videoCount').style.display = 'none'; im.style.display = 'block'; im.decoding = 'async'; im.src = src; lb.classList.remove('out'); lb.classList.add('on'); }
+function openLb(src) { const im = $('lbImg'), v = $('lbVideo'); v.pause(); v.removeAttribute('src'); v.load(); v.style.display = 'none'; $('adSlideText').style.display = 'none'; $('adSlidePrev').style.display = 'none'; $('adSlideNext').style.display = 'none'; $('videoPrev').style.display = 'none'; $('videoNext').style.display = 'none'; $('videoCount').style.display = 'none'; im.style.display = 'block'; im.src = src; lb.classList.remove('out'); lb.classList.add('on'); }
 function openVideo(src) { openVideoGallery([src].filter(Boolean), 0); }
 function openVideoGallery(sources, index) { const list = (sources || []).map(x => typeof x === 'string' ? x : x && x.src).filter(Boolean); if (!list.length) return; videoIndex = ((index || 0) % list.length + list.length) % list.length; const im = $('lbImg'), v = $('lbVideo'); $('adSlideText').style.display = 'none'; $('adSlidePrev').style.display = 'none'; $('adSlideNext').style.display = 'none'; im.removeAttribute('src'); im.style.display = 'none'; v.pause(); v.src = list[videoIndex]; v.style.display = 'block'; $('videoPrev').style.display = list.length > 1 ? 'block' : 'none'; $('videoNext').style.display = list.length > 1 ? 'block' : 'none'; $('videoCount').style.display = list.length > 1 ? 'block' : 'none'; $('videoCount').textContent = (videoIndex + 1) + ' / ' + list.length; lb.dataset.videos = JSON.stringify(list); lb.classList.remove('out'); lb.classList.add('on'); v.play().catch(() => {}); }
 function stepVideo(delta) { let list = []; try { list = JSON.parse(lb.dataset.videos || '[]'); } catch(e) {} if (list.length < 2) return; videoIndex = (videoIndex + delta + list.length) % list.length; const v = $('lbVideo'); v.pause(); v.src = list[videoIndex]; $('videoCount').textContent = (videoIndex + 1) + ' / ' + list.length; v.play().catch(() => {}); }
@@ -405,19 +405,10 @@ function renderSlideshow(c) {
   const host = $('gymSlideshow'); if (!host) return;
   const photos = Array.isArray(c.gallery) ? c.gallery.filter(x => x && x.src) : [];
   if (!photos.length) { host.innerHTML = ''; if (slideTimer) clearInterval(slideTimer); return; }
-  // Stage image loading: warm only the first five slideshow photos at startup.
-  // Remaining photos are requested as the slideshow reaches them; videos stay unloaded until opened.
-  photos.slice(0, 5).forEach((photo, index) => {
-    if (!photo || !photo.src) return;
-    const preload = new Image();
-    preload.decoding = 'async';
-    if (index === 0) preload.fetchPriority = 'high';
-    preload.src = photo.src;
-  });
   slideIndex = ((slideIndex % photos.length) + photos.length) % photos.length;
   const draw = () => {
     const p = photos[slideIndex];
-    host.innerHTML = `<div class="gym-slideshow"><img id="gymSlideImage" src="${esc(p.src)}" fetchpriority="high" decoding="async" alt="Gladiators Gym" style="object-position:${Number(p.x ?? 50)}% ${Number(p.y ?? 50)}%">${photos.length > 1 ? '<button class="slide-nav slide-prev" aria-label="Previous photo">‹</button><button class="slide-nav slide-next" aria-label="Next photo">›</button>' : ''}</div>${photos.length > 1 ? `<div class="slide-dots">${photos.map((_,i)=>`<button class="${i===slideIndex?'active':''}" data-slide="${i}" aria-label="Photo ${i+1}"></button>`).join('')}</div>` : ''}`;
+    host.innerHTML = `<div class="gym-slideshow"><img id="gymSlideImage" src="${esc(p.src)}" alt="Gladiators Gym" style="object-position:${Number(p.x ?? 50)}% ${Number(p.y ?? 50)}%">${photos.length > 1 ? '<button class="slide-nav slide-prev" aria-label="Previous photo">‹</button><button class="slide-nav slide-next" aria-label="Next photo">›</button>' : ''}</div>${photos.length > 1 ? `<div class="slide-dots">${photos.map((_,i)=>`<button class="${i===slideIndex?'active':''}" data-slide="${i}" aria-label="Photo ${i+1}"></button>`).join('')}</div>` : ''}`;
     const prev = host.querySelector('.slide-prev'), next = host.querySelector('.slide-next');
     if (prev) prev.onclick = () => { slideIndex = (slideIndex - 1 + photos.length) % photos.length; draw(); restart(); };
     if (next) next.onclick = () => { slideIndex = (slideIndex + 1) % photos.length; draw(); restart(); };
@@ -433,63 +424,6 @@ function renderSlideshow(c) {
   };
   const restart = () => { if (slideTimer) clearInterval(slideTimer); if (photos.length > 1) slideTimer = setInterval(() => { slideIndex = (slideIndex + 1) % photos.length; draw(); }, 2500); };
   draw(); restart();
-}
-
-// Background media warm-up: slideshow photos first, other photos next, videos last.
-// This starts only after the public page has rendered, so it does not block initial HTML/UI.
-let backgroundVideoPreloads = [];
-function warmImage(src) {
-  return new Promise(resolve => {
-    if (!src) return resolve();
-    const im = new Image();
-    im.decoding = 'async';
-    im.onload = () => resolve();
-    im.onerror = () => resolve();
-    im.src = src;
-    if (im.complete) resolve();
-  });
-}
-function warmVideo(src) {
-  return new Promise(resolve => {
-    if (!src) return resolve();
-    const v = document.createElement('video');
-    v.preload = 'auto';
-    v.muted = true;
-    v.playsInline = true;
-    v.style.display = 'none';
-    let done = false;
-    const finish = () => { if (done) return; done = true; clearTimeout(timer); resolve(); };
-    v.addEventListener('loadeddata', finish, {once:true});
-    v.addEventListener('error', finish, {once:true});
-    const timer = setTimeout(finish, 12000);
-    v.src = src;
-    document.body.appendChild(v);
-    backgroundVideoPreloads.push(v);
-    try { v.load(); } catch (_) { finish(); }
-  });
-}
-function startBackgroundMediaWarmup(c) {
-  const photos = (Array.isArray(c.gallery) ? c.gallery : []).map(x => x && x.src).filter(Boolean);
-  const otherPhotos = [c.memImg, c.clsImg, c.hrsImg, c.fixImg,
-    ...(Array.isArray(c.offers) ? c.offers.map(x => x && x.image) : []),
-    ...(Array.isArray(c.adMedia) ? c.adMedia.filter(x => x && x.type !== 'video').map(x => x.src) : [])
-  ].filter(Boolean);
-  const videos = [
-    ...(Array.isArray(c.gymVideos) ? c.gymVideos.map(x => typeof x === 'string' ? x : x && x.src) : []),
-    c.gymVideo,
-    ...(Array.isArray(c.adMedia) ? c.adMedia.filter(x => x && x.type === 'video').map(x => x.src) : [])
-  ].filter(Boolean);
-  const unique = arr => [...new Set(arr)];
-  const idle = cb => ('requestIdleCallback' in window) ? requestIdleCallback(cb, {timeout: 1200}) : setTimeout(cb, 150);
-  idle(async () => {
-    // First five slideshow images begin together for a fast first interaction.
-    await Promise.all(unique(photos).slice(0, 5).map(warmImage));
-    // Remaining slideshow images load in the background, one at a time.
-    for (const src of unique(photos).slice(5)) await warmImage(src);
-    // Only after the slideshow and other still images, begin video warm-up.
-    for (const src of unique(otherPhotos)) await warmImage(src);
-    for (const src of unique(videos)) await warmVideo(src);
-  });
 }
 
 function renderPublic(c, logoSrc) {
@@ -536,7 +470,6 @@ function renderPublic(c, logoSrc) {
   <div class="foot">GLADIATORS GYM &amp; SPA</div>`;
 
   renderSlideshow(c);
-  startBackgroundMediaWarmup(c);
   document.querySelectorAll('[data-img]').forEach(t => t.onclick = e => { e.preventDefault(); openLb(c[t.dataset.img + 'Img']); });
   document.querySelectorAll('[data-gym-video]').forEach(t => t.onclick = e => { e.preventDefault(); const list = Array.isArray(c.gymVideos) ? c.gymVideos : []; openVideoGallery(list.length ? list : (c.gymVideo ? [c.gymVideo] : []), 0); });
   document.querySelectorAll('.offer:not(.nodet)').forEach(o => o.onclick = () => openOffer(od[+o.dataset.n]));
@@ -661,22 +594,8 @@ function renderGalleryAdmin() {
   });
 }
 function renderFix() { imgPicker($('fixImgBox'), fixImg, v => { fixImg = v; persist(); renderFix(); }, undefined, {get x(){return fixImgX},set x(v){fixImgX=v},get y(){return fixImgY},set y(v){fixImgY=v}}); }
-let storageWarningShown = false;
 function persist() {
-  try {
-    const s = { logo, offers, active, fixImg, fixImgX, fixImgY, imgs, gallery, gymVideo, gymVideos, adMedia, adOn: $('adOn').checked };
-    SAVE.forEach(k => s[k] = $(k).value);
-    localStorage.setItem(KEY, JSON.stringify(s));
-    storageWarningShown = false;
-    return true;
-  } catch(e) {
-    if (!storageWarningShown) {
-      storageWarningShown = true;
-      console.warn('Gladiators admin backup could not be saved. Browser storage may be full.', e);
-      alert('تنبيه: مساحة التخزين في المتصفح ممتلئة، لذلك قد لا تُحفظ آخر التعديلات كنسخة احتياطية على هذا الجهاز. نزّل gym.json بعد التعديل، واستخدم روابط GitHub المباشرة للفيديوهات بدل رفع الفيديو داخل الصفحة.');
-    }
-    return false;
-  }
+  try { const s = { logo, offers, active, fixImg, fixImgX, fixImgY, imgs, gallery, gymVideo, gymVideos, adMedia, adOn: $('adOn').checked }; SAVE.forEach(k => s[k] = $(k).value); localStorage.setItem(KEY, JSON.stringify(s)); } catch(e) {}
 }
 let openOfferId = null;
 const offerName = o => o.titleEn || o.title || 'Untitled offer';
@@ -747,28 +666,8 @@ const normalize = j => {
 };
 const hosted = /^https?:/.test(location.protocol);
 const isAdmin = !hosted || new URLSearchParams(location.search).has('admin');
-// Respect the browser's HTTP cache for repeat visits. gym.json may be several MB, so revalidating on every visit can delay the public page.
-const getJSON = async () => {
-  const controller = ('AbortController' in window) ? new AbortController() : null;
-  const timeout = controller ? setTimeout(() => controller.abort(), 30000) : null;
-  try {
-    const response = await fetch(new URL('gym.json', location.href).href, {
-      cache: 'default',
-      credentials: 'same-origin',
-      signal: controller ? controller.signal : undefined
-    });
-    if (!response.ok) throw new Error('gym.json returned HTTP ' + response.status);
-    const type = response.headers.get('content-type') || '';
-    const raw = await response.text();
-    if (!raw.trim()) throw new Error('gym.json is empty');
-    let data;
-    try { data = JSON.parse(raw); }
-    catch (_) { throw new Error('gym.json is not valid JSON'); }
-    return normalize(data);
-  } finally {
-    if (timeout) clearTimeout(timeout);
-  }
-};
+// Let the browser cache gym.json and revalidate it when needed instead of forcing a fresh download on every visit.
+const getJSON = () => fetch('gym.json', { cache: 'no-cache' }).then(r => { if (!r.ok) throw 0; return r.json(); }).then(normalize);
 
 if (isAdmin) {
   try { const s = JSON.parse(localStorage.getItem(KEY) || '{}'); SAVE.forEach(k => { if (s[k]) $(k).value = s[k]; }); logo = s.logo || ''; offers = s.offers || []; active = s.active || ''; fixImg = s.fixImg || ''; fixImgX = Number(s.fixImgX ?? 50); fixImgY = Number(s.fixImgY ?? 50); imgs = s.imgs || imgs; gallery = Array.isArray(s.gallery) ? s.gallery : []; adMedia = Array.isArray(s.adMedia) ? s.adMedia : []; gymVideo = s.gymVideo || ''; gymVideos = Array.isArray(s.gymVideos) ? s.gymVideos : (gymVideo ? [{src:gymVideo}] : []); $('adOn').checked = !!s.adOn; } catch(e) {}
@@ -789,21 +688,10 @@ if (isAdmin) {
     if (!logo) findLogo($('logoUrl').value.trim()).then(x => { if (x) { logo = x; persist(); } });
   }
 } else {
-  $('pub').innerHTML = '<div style="padding:24px 16px;text-align:center;color:#fff;background:#111;border:1px solid #e01616;border-radius:14px">Loading Gladiators Gym…</div>';
-  getJSON().then(async j => {
+  getJSON().catch(() => ({ offers: [] })).then(async j => {
     renderPublic(j, '');
-    const logoName = j.logoUrl;
-    if (logoName) {
-      const l = await findLogo(logoName);
-      if (l) {
-        // Update the existing logo only; do not rebuild the entire page/slideshow.
-        const logoEl = $('pub').querySelector('.hero .hrow img');
-        if (logoEl) logoEl.src = l;
-      }
-    }
-  }).catch(err => {
-    console.error('Could not load gym.json:', err);
-    $('pub').innerHTML = '<div style="padding:24px 16px;text-align:center;color:#fff;background:#111;border:1px solid #e01616;border-radius:14px;line-height:1.8"><strong style="color:#ff4a5a">Gladiators Gym</strong><br>تعذر تحميل بيانات الصفحة الآن.<br>تأكد من رفع ملف <b>gym.json</b> بجوار index.html وأنه ملف JSON صحيح، ثم أعد المحاولة بعد اكتمال تحديث GitHub Pages.<br><button type="button" onclick="location.reload()" style="margin-top:14px">إعادة المحاولة</button></div>';
+    const l = await findLogo(j.logoUrl);
+    if (l) renderPublic(j, l);
   });
 }
 </script>
