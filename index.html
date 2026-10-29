@@ -147,7 +147,7 @@ h3:after{content:"";flex:1;height:1px;background:rgba(255,255,255,.2)}
   <h2>GLADIATORS PAGE ADMIN</h2>
   <details open>
    <summary>Gym info</summary>
-   <label>Hosted page address (where you uploaded index.html)</label><input id="host" type="text" placeholder="https://your-name.github.io/gladiators/">
+   <label for="host">Hosted page address (where you uploaded index.html)</label><input id="host" type="text" placeholder="https://your-name.github.io/gladiators/">
    <label>Logo file name (same folder as index.html)</label><input id="logoUrl" type="text" value="GYM LOGO.png">
    <label>Short line under the logo</label><input id="tag" type="text" placeholder="Open every day 10 AM - 12 AM">
    <label>WhatsApp number (like 01012345678)</label><input id="wa" type="text" value="01090819150">
@@ -594,8 +594,22 @@ function renderGalleryAdmin() {
   });
 }
 function renderFix() { imgPicker($('fixImgBox'), fixImg, v => { fixImg = v; persist(); renderFix(); }, undefined, {get x(){return fixImgX},set x(v){fixImgX=v},get y(){return fixImgY},set y(v){fixImgY=v}}); }
+let storageWarningShown = false;
 function persist() {
-  try { const s = { logo, offers, active, fixImg, fixImgX, fixImgY, imgs, gallery, gymVideo, gymVideos, adMedia, adOn: $('adOn').checked }; SAVE.forEach(k => s[k] = $(k).value); localStorage.setItem(KEY, JSON.stringify(s)); } catch(e) {}
+  try {
+    const s = { logo, offers, active, fixImg, fixImgX, fixImgY, imgs, gallery, gymVideo, gymVideos, adMedia, adOn: $('adOn').checked };
+    SAVE.forEach(k => s[k] = $(k).value);
+    localStorage.setItem(KEY, JSON.stringify(s));
+    storageWarningShown = false;
+    return true;
+  } catch(e) {
+    if (!storageWarningShown) {
+      storageWarningShown = true;
+      console.warn('Gladiators admin backup could not be saved. Browser storage may be full.', e);
+      alert('تنبيه: مساحة التخزين في المتصفح ممتلئة، لذلك قد لا تُحفظ آخر التعديلات كنسخة احتياطية على هذا الجهاز. نزّل gym.json بعد التعديل، واستخدم روابط GitHub المباشرة للفيديوهات بدل رفع الفيديو داخل الصفحة.');
+    }
+    return false;
+  }
 }
 let openOfferId = null;
 const offerName = o => o.titleEn || o.title || 'Untitled offer';
@@ -666,8 +680,28 @@ const normalize = j => {
 };
 const hosted = /^https?:/.test(location.protocol);
 const isAdmin = !hosted || new URLSearchParams(location.search).has('admin');
-// Let the browser cache gym.json and revalidate it when needed instead of forcing a fresh download on every visit.
-const getJSON = () => fetch('gym.json', { cache: 'no-cache' }).then(r => { if (!r.ok) throw 0; return r.json(); }).then(normalize);
+// Respect the browser's HTTP cache for repeat visits. gym.json may be several MB, so revalidating on every visit can delay the public page.
+const getJSON = async () => {
+  const controller = ('AbortController' in window) ? new AbortController() : null;
+  const timeout = controller ? setTimeout(() => controller.abort(), 30000) : null;
+  try {
+    const response = await fetch(new URL('gym.json', location.href).href, {
+      cache: 'default',
+      credentials: 'same-origin',
+      signal: controller ? controller.signal : undefined
+    });
+    if (!response.ok) throw new Error('gym.json returned HTTP ' + response.status);
+    const type = response.headers.get('content-type') || '';
+    const raw = await response.text();
+    if (!raw.trim()) throw new Error('gym.json is empty');
+    let data;
+    try { data = JSON.parse(raw); }
+    catch (_) { throw new Error('gym.json is not valid JSON'); }
+    return normalize(data);
+  } finally {
+    if (timeout) clearTimeout(timeout);
+  }
+};
 
 if (isAdmin) {
   try { const s = JSON.parse(localStorage.getItem(KEY) || '{}'); SAVE.forEach(k => { if (s[k]) $(k).value = s[k]; }); logo = s.logo || ''; offers = s.offers || []; active = s.active || ''; fixImg = s.fixImg || ''; fixImgX = Number(s.fixImgX ?? 50); fixImgY = Number(s.fixImgY ?? 50); imgs = s.imgs || imgs; gallery = Array.isArray(s.gallery) ? s.gallery : []; adMedia = Array.isArray(s.adMedia) ? s.adMedia : []; gymVideo = s.gymVideo || ''; gymVideos = Array.isArray(s.gymVideos) ? s.gymVideos : (gymVideo ? [{src:gymVideo}] : []); $('adOn').checked = !!s.adOn; } catch(e) {}
@@ -688,10 +722,21 @@ if (isAdmin) {
     if (!logo) findLogo($('logoUrl').value.trim()).then(x => { if (x) { logo = x; persist(); } });
   }
 } else {
-  getJSON().catch(() => ({ offers: [] })).then(async j => {
+  $('pub').innerHTML = '<div style="padding:24px 16px;text-align:center;color:#fff;background:#111;border:1px solid #e01616;border-radius:14px">Loading Gladiators Gym…</div>';
+  getJSON().then(async j => {
     renderPublic(j, '');
-    const l = await findLogo(j.logoUrl);
-    if (l) renderPublic(j, l);
+    const logoName = j.logoUrl;
+    if (logoName) {
+      const l = await findLogo(logoName);
+      if (l) {
+        // Update the existing logo only; do not rebuild the entire page/slideshow.
+        const logoEl = $('pub').querySelector('.hero .hrow img');
+        if (logoEl) logoEl.src = l;
+      }
+    }
+  }).catch(err => {
+    console.error('Could not load gym.json:', err);
+    $('pub').innerHTML = '<div style="padding:24px 16px;text-align:center;color:#fff;background:#111;border:1px solid #e01616;border-radius:14px;line-height:1.8"><strong style="color:#ff4a5a">Gladiators Gym</strong><br>تعذر تحميل بيانات الصفحة الآن.<br>تأكد من رفع ملف <b>gym.json</b> بجوار index.html وأنه ملف JSON صحيح، ثم أعد المحاولة بعد اكتمال تحديث GitHub Pages.<br><button type="button" onclick="location.reload()" style="margin-top:14px">إعادة المحاولة</button></div>';
   });
 }
 </script>
