@@ -435,6 +435,63 @@ function renderSlideshow(c) {
   draw(); restart();
 }
 
+// Background media warm-up: slideshow photos first, other photos next, videos last.
+// This starts only after the public page has rendered, so it does not block initial HTML/UI.
+let backgroundVideoPreloads = [];
+function warmImage(src) {
+  return new Promise(resolve => {
+    if (!src) return resolve();
+    const im = new Image();
+    im.decoding = 'async';
+    im.onload = () => resolve();
+    im.onerror = () => resolve();
+    im.src = src;
+    if (im.complete) resolve();
+  });
+}
+function warmVideo(src) {
+  return new Promise(resolve => {
+    if (!src) return resolve();
+    const v = document.createElement('video');
+    v.preload = 'auto';
+    v.muted = true;
+    v.playsInline = true;
+    v.style.display = 'none';
+    let done = false;
+    const finish = () => { if (done) return; done = true; clearTimeout(timer); resolve(); };
+    v.addEventListener('loadeddata', finish, {once:true});
+    v.addEventListener('error', finish, {once:true});
+    const timer = setTimeout(finish, 12000);
+    v.src = src;
+    document.body.appendChild(v);
+    backgroundVideoPreloads.push(v);
+    try { v.load(); } catch (_) { finish(); }
+  });
+}
+function startBackgroundMediaWarmup(c) {
+  const photos = (Array.isArray(c.gallery) ? c.gallery : []).map(x => x && x.src).filter(Boolean);
+  const otherPhotos = [c.memImg, c.clsImg, c.hrsImg, c.fixImg,
+    ...(Array.isArray(c.offers) ? c.offers.map(x => x && x.image) : []),
+    ...(Array.isArray(c.adMedia) ? c.adMedia.filter(x => x && x.type !== 'video').map(x => x.src) : [])
+  ].filter(Boolean);
+  const videos = [
+    ...(Array.isArray(c.gymVideos) ? c.gymVideos.map(x => typeof x === 'string' ? x : x && x.src) : []),
+    c.gymVideo,
+    ...(Array.isArray(c.adMedia) ? c.adMedia.filter(x => x && x.type === 'video').map(x => x.src) : [])
+  ].filter(Boolean);
+  const unique = arr => [...new Set(arr)];
+  const idle = cb => ('requestIdleCallback' in window) ? requestIdleCallback(cb, {timeout: 1200}) : setTimeout(cb, 150);
+  idle(async () => {
+    // First five slideshow images begin together for a fast first interaction.
+    await Promise.all(unique(photos).slice(0, 5).map(warmImage));
+    // Remaining slideshow images load in the background, one at a time.
+    for (const src of unique(photos).slice(5)) await warmImage(src);
+    // Only after the slideshow and other still images, begin video warm-up.
+    for (const src of unique(otherPhotos)) await warmImage(src);
+    for (const src of unique(videos)) await warmVideo(src);
+  });
+}
+
 function renderPublic(c, logoSrc) {
   const num = waDigits(c.wa);
   const T = I18N[lang];
@@ -479,6 +536,7 @@ function renderPublic(c, logoSrc) {
   <div class="foot">GLADIATORS GYM &amp; SPA</div>`;
 
   renderSlideshow(c);
+  startBackgroundMediaWarmup(c);
   document.querySelectorAll('[data-img]').forEach(t => t.onclick = e => { e.preventDefault(); openLb(c[t.dataset.img + 'Img']); });
   document.querySelectorAll('[data-gym-video]').forEach(t => t.onclick = e => { e.preventDefault(); const list = Array.isArray(c.gymVideos) ? c.gymVideos : []; openVideoGallery(list.length ? list : (c.gymVideo ? [c.gymVideo] : []), 0); });
   document.querySelectorAll('.offer:not(.nodet)').forEach(o => o.onclick = () => openOffer(od[+o.dataset.n]));
