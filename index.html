@@ -341,7 +341,7 @@ const SCENE = '<svg class="scn" viewBox="0 0 200 150" preserveAspectRatio="xMaxY
 /* ---------- image lightbox ---------- */
 const lb = $('lb'), ob = $('ob');
 function closeEl(el) { if (!el.classList.contains('on')) return; el.classList.add('out'); setTimeout(() => el.classList.remove('on', 'out'), 170); }
-function openLb(src) { const im = $('lbImg'), v = $('lbVideo'); v.pause(); v.removeAttribute('src'); v.load(); v.style.display = 'none'; $('adSlideText').style.display = 'none'; $('adSlidePrev').style.display = 'none'; $('adSlideNext').style.display = 'none'; $('videoPrev').style.display = 'none'; $('videoNext').style.display = 'none'; $('videoCount').style.display = 'none'; im.style.display = 'block'; im.src = src; lb.classList.remove('out'); lb.classList.add('on'); }
+function openLb(src) { const im = $('lbImg'), v = $('lbVideo'); v.pause(); v.removeAttribute('src'); v.load(); v.style.display = 'none'; $('adSlideText').style.display = 'none'; $('adSlidePrev').style.display = 'none'; $('adSlideNext').style.display = 'none'; $('videoPrev').style.display = 'none'; $('videoNext').style.display = 'none'; $('videoCount').style.display = 'none'; im.style.display = 'block'; im.decoding = 'async'; im.src = src; lb.classList.remove('out'); lb.classList.add('on'); }
 function openVideo(src) { openVideoGallery([src].filter(Boolean), 0); }
 function openVideoGallery(sources, index) { const list = (sources || []).map(x => typeof x === 'string' ? x : x && x.src).filter(Boolean); if (!list.length) return; videoIndex = ((index || 0) % list.length + list.length) % list.length; const im = $('lbImg'), v = $('lbVideo'); $('adSlideText').style.display = 'none'; $('adSlidePrev').style.display = 'none'; $('adSlideNext').style.display = 'none'; im.removeAttribute('src'); im.style.display = 'none'; v.pause(); v.src = list[videoIndex]; v.style.display = 'block'; $('videoPrev').style.display = list.length > 1 ? 'block' : 'none'; $('videoNext').style.display = list.length > 1 ? 'block' : 'none'; $('videoCount').style.display = list.length > 1 ? 'block' : 'none'; $('videoCount').textContent = (videoIndex + 1) + ' / ' + list.length; lb.dataset.videos = JSON.stringify(list); lb.classList.remove('out'); lb.classList.add('on'); v.play().catch(() => {}); }
 function stepVideo(delta) { let list = []; try { list = JSON.parse(lb.dataset.videos || '[]'); } catch(e) {} if (list.length < 2) return; videoIndex = (videoIndex + delta + list.length) % list.length; const v = $('lbVideo'); v.pause(); v.src = list[videoIndex]; $('videoCount').textContent = (videoIndex + 1) + ' / ' + list.length; v.play().catch(() => {}); }
@@ -405,10 +405,19 @@ function renderSlideshow(c) {
   const host = $('gymSlideshow'); if (!host) return;
   const photos = Array.isArray(c.gallery) ? c.gallery.filter(x => x && x.src) : [];
   if (!photos.length) { host.innerHTML = ''; if (slideTimer) clearInterval(slideTimer); return; }
+  // Stage image loading: warm only the first five slideshow photos at startup.
+  // Remaining photos are requested as the slideshow reaches them; videos stay unloaded until opened.
+  photos.slice(0, 5).forEach((photo, index) => {
+    if (!photo || !photo.src) return;
+    const preload = new Image();
+    preload.decoding = 'async';
+    if (index === 0) preload.fetchPriority = 'high';
+    preload.src = photo.src;
+  });
   slideIndex = ((slideIndex % photos.length) + photos.length) % photos.length;
   const draw = () => {
     const p = photos[slideIndex];
-    host.innerHTML = `<div class="gym-slideshow"><img id="gymSlideImage" src="${esc(p.src)}" alt="Gladiators Gym" style="object-position:${Number(p.x ?? 50)}% ${Number(p.y ?? 50)}%">${photos.length > 1 ? '<button class="slide-nav slide-prev" aria-label="Previous photo">‹</button><button class="slide-nav slide-next" aria-label="Next photo">›</button>' : ''}</div>${photos.length > 1 ? `<div class="slide-dots">${photos.map((_,i)=>`<button class="${i===slideIndex?'active':''}" data-slide="${i}" aria-label="Photo ${i+1}"></button>`).join('')}</div>` : ''}`;
+    host.innerHTML = `<div class="gym-slideshow"><img id="gymSlideImage" src="${esc(p.src)}" fetchpriority="high" decoding="async" alt="Gladiators Gym" style="object-position:${Number(p.x ?? 50)}% ${Number(p.y ?? 50)}%">${photos.length > 1 ? '<button class="slide-nav slide-prev" aria-label="Previous photo">‹</button><button class="slide-nav slide-next" aria-label="Next photo">›</button>' : ''}</div>${photos.length > 1 ? `<div class="slide-dots">${photos.map((_,i)=>`<button class="${i===slideIndex?'active':''}" data-slide="${i}" aria-label="Photo ${i+1}"></button>`).join('')}</div>` : ''}`;
     const prev = host.querySelector('.slide-prev'), next = host.querySelector('.slide-next');
     if (prev) prev.onclick = () => { slideIndex = (slideIndex - 1 + photos.length) % photos.length; draw(); restart(); };
     if (next) next.onclick = () => { slideIndex = (slideIndex + 1) % photos.length; draw(); restart(); };
